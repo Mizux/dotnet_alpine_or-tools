@@ -13,4 +13,4 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine AS final
 WORKDIR /app
 EXPOSE 80
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "SimpleRoutingProgram.dll"]
+ENTRYPOINT ["./Google.OrTools.SimpleRoutingProgram"]

@@ -4,14 +4,25 @@ Using .Net OR-Tools in a microsoft alpine docker
 
 ## Docker Test
 
-To build, simply run:
+### Build
+To build and run:
 ```sh
 docker build -t alp --target=build -f Dockerfile .
+docker run --rm -it alp dotnet run -c Release
 ```
 
-To run:
+To inspect the image:
 ```sh
-docker run --rm -it alp dotnet bin/Debug/netcoreapp3.1/Google.OrTools.SimpleRoutingProgram.dll
+docker run --rm -it alp sh
+```
+note: since it is a alpine based image only `sh` is available not `bash`
+
+### Publish
+
+To build and run the published version:
+```sh
+docker build -t alp --target=publish -f Dockerfile .
+docker run --rm -it alp ./publish/Google.OrTools.SimpleRoutingProgram
 ```
 
 Observed:
@@ -27,6 +38,14 @@ Unhandled exception. System.TypeInitializationException: The type initializer fo
    --- End of inner exception stack trace ---
    at Google.OrTools.ConstraintSolver.operations_research_constraint_solverPINVOKE.new_RoutingIndexManager__SWIG_0(Int32 jarg1, Int32 jarg2, Int32 jarg3)
    at SimpleRoutingProgram.Main(String[] args) in /usr/local/google/home/corentinl/work/dotnet_alpine_or-tools/SimpleRoutingProgram.cs:line 36
+```
+
+### Final
+
+To build and run the final image:
+```sh
+docker build -t alp --target=final -f Dockerfile .
+docker run --rm -it alp
 ```
 
 ## License
