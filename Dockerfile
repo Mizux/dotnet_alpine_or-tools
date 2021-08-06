@@ -2,7 +2,10 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
 WORKDIR /app
 COPY "SimpleRoutingProgram.csproj" .
+# from https://github.com/google/or-tools/releases/download/v9.0/or-tools_alpine-edge_v9.0.9048.tar.gz
+COPY "packages" packages
 RUN dotnet restore "SimpleRoutingProgram.csproj"
+
 COPY . .
 RUN dotnet build "SimpleRoutingProgram.csproj" -c Release -o /app/build
 
